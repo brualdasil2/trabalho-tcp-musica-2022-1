@@ -6,21 +6,22 @@ import org.jfugue.player.*;
 public class Sound {
 
 	
-	Player player = new Player();
-	int currentOctave = 5;
-	int currentBPM = 60;
-	int currentVolume = 90;
-	String currentInstrument = "PIANO";
-	Pattern music = new Pattern();
+	private static Player player = new Player();
+	private static int currentOctave;
+	private static int currentBPM;
+	private static int currentVolume;
+	private static String currentInstrument;
+	private static Pattern music;
 	
-	public Sound() {
-		music.setTempo(currentBPM);
-		setVolume(currentVolume);
-		setInstrument(currentInstrument);
+	public static void Initialize() {
+		music = new Pattern();
+		setBPM(60);
+		setVolume(90);
+		setInstrument("PIANO");
+		setOctave(5);
 	}
-	
 
-	public void playNote(char note) {
+	public static void playNote(char note) {
 		Pattern m = new Pattern();
 		m.add("T" + Integer.toString(currentBPM));
 		m.add(":CON(7, " + Integer.toString(currentVolume) + ")");
@@ -29,39 +30,42 @@ public class Sound {
 		player.play(m);
 	}
 	
-	public void playMusic() {
-		System.out.println(music.toString());
+	public static void playMusic() {
 		player.play(music);
 	}
 	
-	public void createMidiFile(String path) {
+	public static void createMidiFile(String path) {
 		//music.save(new File("musica"));
 	}
 	
-	public void addNote(char note) {
+	public static void addNote(char note) {
 		music.add(note + Integer.toString(currentOctave) + "q");
 	}
 	
-	public void addPause() {
+	public static void addPause() {
 		music.add("R");
 	}
 	
-	public void setBPM(int bpm) {
+	public static void setBPM(int bpm) {
 		currentBPM = bpm;
 		music.add("T" + Integer.toString(currentBPM));
 	}
 	
-	public void setVolume(int vol) {
+	public static void setOctave(int octave) {
+		currentOctave = octave;
+	}
+	
+	public static void setVolume(int vol) {
 		currentVolume = vol;
 		music.add(":CON(7, " + Integer.toString(currentVolume) + ")");
 	}
 	
-	public void setInstrument(String instrument) {
+	public static void setInstrument(String instrument) {
 		currentInstrument = instrument;
 		music.add("I[" + instrument + "]");
 	}
 	
-	public int getCurrentBPM() {
+	public static int getCurrentBPM() {
 		return currentBPM;
 	}
 }
