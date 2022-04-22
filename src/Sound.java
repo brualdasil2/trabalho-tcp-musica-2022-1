@@ -1,5 +1,7 @@
 import java.io.File;
+import java.io.IOException;
 
+import org.jfugue.midi.MidiFileManager;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.*;
 
@@ -35,7 +37,12 @@ public class Sound {
 	}
 	
 	public static void createMidiFile(String path) {
-		//music.save(new File("musica"));
+		File file = new File(path);
+		try {
+			MidiFileManager.savePatternToMidi(music, file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void addNote(char note) {
