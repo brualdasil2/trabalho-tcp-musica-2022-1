@@ -1,17 +1,10 @@
+import java.awt.Color;
+import java.awt.event.*;
 
+import javax.swing.*;
 public class HelloWorld {
-
 	public static void main(String[] args) {
-		Human person = new Human("Joel", 44);
-		person.sayName();
-		if (person.canDrink()) {
-			System.out.println(person.getName() + " can drink!");
-		}
-		else {
-			System.out.println(person.getName() + " is too young to drink!");
-		}
+		Display display = new Display("Toca musica", 1280, 720);
+		ScreenManager sm = new ScreenManager(display);
 	}
 }
-//Pedro conseguiu utilizar o github
-//Leo tambem conseguiu
-//Bruno também!
