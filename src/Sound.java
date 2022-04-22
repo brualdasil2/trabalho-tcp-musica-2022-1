@@ -1,13 +1,15 @@
+import java.io.File;
+
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.*;
 
 public class Sound {
-	
+
 	
 	Player player = new Player();
 	int currentOctave = 5;
 	int currentBPM = 60;
-	int currentVolume = 40;
+	int currentVolume = 90;
 	String currentInstrument = "PIANO";
 	Pattern music = new Pattern();
 	
@@ -18,10 +20,22 @@ public class Sound {
 	}
 	
 
+	public void playNote(char note) {
+		Pattern m = new Pattern();
+		m.add("T" + Integer.toString(currentBPM));
+		m.add(":CON(7, " + Integer.toString(currentVolume) + ")");
+		m.add("I[" + currentInstrument + "]");
+		m.add(note + Integer.toString(currentOctave) + "q");
+		player.play(m);
+	}
 	
 	public void playMusic() {
 		System.out.println(music.toString());
 		player.play(music);
+	}
+	
+	public void createMidiFile(String path) {
+		//music.save(new File("musica"));
 	}
 	
 	public void addNote(char note) {
