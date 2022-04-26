@@ -6,20 +6,18 @@ import org.jfugue.pattern.Pattern;
 import org.jfugue.player.*;
 
 public class Sound {
-
-	
 	private static Player player = new Player();
 	private static int currentOctave;
 	private static int currentBPM;
 	private static int currentVolume;
-	private static String currentInstrument;
+	private static int currentInstrument;
 	private static Pattern music;
 	
 	public static void Initialize() {
 		music = new Pattern();
 		setBPM(60);
-		setVolume(90);
-		setInstrument("PIANO");
+		setVolume(80);
+		setInstrument(0);
 		setOctave(5);
 	}
 
@@ -66,13 +64,25 @@ public class Sound {
 		currentVolume = vol;
 		music.add(":CON(7, " + Integer.toString(currentVolume) + ")");
 	}
-	
-	public static void setInstrument(String instrument) {
+
+	public static void setInstrument(int instrument) {
 		currentInstrument = instrument;
-		music.add("I[" + instrument + "]");
+		music.add("I" + instrument  );
 	}
-	
+
 	public static int getCurrentBPM() {
 		return currentBPM;
+	}
+
+	public static int getVolume(){
+		return currentVolume;
+	}
+
+	public static int getCurrentOctave(){
+		return currentOctave;
+	}
+
+	public static int getCurrentInstrument(){
+		return currentInstrument;
 	}
 }
