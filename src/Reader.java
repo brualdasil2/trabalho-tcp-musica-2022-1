@@ -31,6 +31,9 @@ public class Reader {
     public static int GetCurrentPos(){
         return currentPos;
     }
+    public static String getLastCommandCode(){
+        return lastCommandCode;
+    }
 
     private static Boolean isValidCommand(String command){
         String[] validCommands = {" ","!","?",".",System.lineSeparator(),";",","};
