@@ -1,32 +1,32 @@
-public class Commands {
-    public void IncreaseVolume(){
-
+public class Commands{
+    public static void PlayNote(char note){
+        Sound.addNote(note);
     }
-    public void DecreaseVolume(){
 
+    public static void IncreaseOctave(){
+        Sound.setOctave(Sound.getCurrentOctave()+1);
     }
-    public void PlayNote(char note){
 
+    public static void IncreaseVolume(){
+        Sound.setVolume(2*Sound.getVolume());
     }
-    public void IncreaseOctave(){
 
+    public static void PlayRandomNote(){
+        String possibleNotes = "ABCDEFG";
+        char randomNote = possibleNotes.toCharArray()[(int)(Math.random() * possibleNotes.length())];
+        PlayNote(randomNote);
     }
-    public void DecreaseOctave(){
 
+    public static void ChangeInstrument(int newInstrument){
+        Sound.setInstrument(newInstrument);
     }
-    public void PlayRandomNote(){
 
+    public static void DoNothing(){
+        Sound.addPause();
     }
-    public void ChangeInstrument(){
 
-    }
-    public void IncreaseBPM(){
-
-    }
-    public void DecreaseBPM(){
-
-    }
-    public void DoNothing(){
-
+    public static void IncreaseInstrument(int increment){
+        int oldInstrument = Sound.getCurrentInstrument();
+        Sound.setInstrument(oldInstrument + increment);
     }
 }
