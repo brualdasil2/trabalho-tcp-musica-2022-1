@@ -1,12 +1,15 @@
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class ScreenManager {
 	private Screen currentScreen;
 	private Screen editorScreen, settingsScreen, helpScreen;
 	
-	public ScreenManager(Display display) {		
+	public ScreenManager(Display display) throws IOException {		
 		editorScreen = new EditorScreen(this);
 		settingsScreen = new SettingsScreen(this);
 		
@@ -30,5 +33,9 @@ public class ScreenManager {
 	}
 	public Screen getSettingsScreen() {
 		return settingsScreen;
+	}
+	public static Icon resizeIcon(Image img, JButton button) {
+	    Image resizedImage = img.getScaledInstance(button.getWidth(), button.getHeight(),  java.awt.Image.SCALE_SMOOTH);  
+	    return new ImageIcon(resizedImage);
 	}
 }
