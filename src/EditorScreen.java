@@ -66,21 +66,23 @@ public class EditorScreen extends Screen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(playButton.getIcon()== playIcon) {
-					System.out.println("Tocando a música " + textArea.getText());
+					System.out.println("Tocando a mï¿½sica " + textArea.getText());
 					playButton.setIcon(pauseIcon);
+					MusicPlayer.Play();
 				}
 				else if(playButton.getIcon()== pauseIcon) {
 					System.out.println("Musica Pausada");
 					playButton.setIcon(playIcon);
-					}
+					MusicPlayer.Pause();
+				}
 			}
-			
 		});
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Stop!");
 				playButton.setIcon(playIcon);
+				MusicPlayer.Stop();
 			}
 			
 		});
@@ -116,25 +118,28 @@ public class EditorScreen extends Screen {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				System.out.println("Digitou");
+				sendTextUpdate(textArea.getText());
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				System.out.println("Apagou");
+				sendTextUpdate(textArea.getText());
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {}
 			
 		});
-		
-	
+
 		panel.add(playButton);
 		panel.add(stopButton);
 		panel.add(navButton);
 		panel.add(importButton);
 		panel.add(scroll);
 		panel.add(commandTable);
+	}
+
+	private void sendTextUpdate(String text){
+		Reader.setMusicString(text);
 	}
 }

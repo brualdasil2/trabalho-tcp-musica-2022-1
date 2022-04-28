@@ -23,11 +23,12 @@ public class MusicPlayer {
 		currentOctave = defaultOctave;
 	}
 
-	public static void Play() {	
+	public static void Play() {
+		Sound.Initialize();
 		String selectedCommand = new String();
 		String previousCommand = new String();
 		
-		playing = true; // A mudança de playing para false será feita posteriormente pela interface do usuário
+		playing = true; // A mudanï¿½a de playing para false serï¿½ feita posteriormente pela interface do usuï¿½rio
 		
 		while( playing ) {
 			
@@ -41,7 +42,7 @@ public class MusicPlayer {
 				case "E":
 				case "F":
 				case "G":
-					Commands.playNote(selectedCommand);
+					Commands.PlayNote(selectedCommand.charAt(0));
 					break;
 				case "a":
 				case "b":
@@ -65,22 +66,22 @@ public class MusicPlayer {
 				case "W":
 				case "X":
 				case "Z":
-					if ("ABCDEFG".indexOf(previousCommand) != -1) {
-						Commands.playNote(previousCommand);
+					if ("ABCDEFG".indexOf(Reader.getLastCommandCode()) != -1) {
+						Commands.PlayNote(Reader.getLastCommandCode().charAt(0));
 					}
 					else {
-						Commands.doNothing();
+						Commands.DoNothing();
 					}
 					break;
 				case " ":
-					Commands.increaseVolume();
+					Commands.IncreaseVolume();
 					break;
 				case "!":
-					Commands.changeIntrument(114);//Agogo
+					Commands.ChangeInstrument(114);//Agogo
 				case "O":
 				case "I":
 				case "U":
-					Commands.changeIntrument(7);//Harpsichord
+					Commands.ChangeInstrument(7);//Harpsichord
 					break;
 				case "0":
 				case "1":
@@ -92,31 +93,36 @@ public class MusicPlayer {
 				case "7":
 				case "8":
 				case "9":
-					Commands.changeIntrument(this.currentInstrument + Integer.parseInt(selectedCommand));
+					Commands.ChangeInstrument(currentInstrument + Integer.parseInt(selectedCommand));
 					break;
 				case "?":
 				case ".":
-					Commands.increaseOctave();
+					Commands.IncreaseOctave();
 					break;
 				case "\n":
-					Commands.changeIntrument(15);//Tubular Bells
+					Commands.ChangeInstrument(15);//Tubular Bells
 					break;
 				case ";":
-					Commands.changeIntrument(76);//Pan Flute
+					Commands.ChangeInstrument(76);//Pan Flute
 					break;
 				case ",":
-					Commands.changeIntrument(20);//Church Organ
+					Commands.ChangeInstrument(20);//Church Organ
+					break;
+				case "END":
+					playing = false;
 					break;
 				default:
-					if ("ABCDEFG".indexOf(previousCommand) != -1) {
-						Commands.playNote(previousCommand);
+					if ("ABCDEFG".indexOf(Reader.getLastCommandCode()) != -1) {
+						Commands.PlayNote(Reader.getLastCommandCode().charAt(0));
 					}
 					else {
-						Commands.doNothing();
+						Commands.DoNothing();
 					}
 			}
 			previousCommand = selectedCommand;
-		}	
+		}
+		Sound.playMusic();
+
 	}
 	public static void Pause() {
 		playing = false;
