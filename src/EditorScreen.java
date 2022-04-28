@@ -127,7 +127,7 @@ public class EditorScreen extends Screen {
 			}
 
 			@Override
-			public void changedUpdate(DocumentEvent e) {}
+			public void changedUpdate(DocumentEvent e) { sendTextUpdate(textArea.getText()); }
 			
 		});
 
