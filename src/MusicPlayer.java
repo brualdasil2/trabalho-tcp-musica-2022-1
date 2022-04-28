@@ -25,6 +25,7 @@ public class MusicPlayer {
 
 	public static void Play() {
 		Sound.Initialize();
+		Reader.resetPos();
 		String selectedCommand = new String();
 		String previousCommand = new String();
 		
@@ -93,7 +94,7 @@ public class MusicPlayer {
 				case "7":
 				case "8":
 				case "9":
-					Commands.ChangeInstrument(currentInstrument + Integer.parseInt(selectedCommand));
+					Commands.ChangeInstrument(Sound.getCurrentInstrument() + Integer.parseInt(selectedCommand));
 					break;
 				case "?":
 				case ".":
