@@ -61,9 +61,9 @@ public class SettingsScreen extends Screen {
 		navButton.setBounds(10, 10, 50, 50);
 		dropDownOctaves.setBounds(600, 290, 100, 20);
 		saveButton.setBounds(600, 500, 100, 50);
-		statusVol.setBounds(750, 190, 100, 20);
-		statusBPM.setBounds(750, 240, 100, 20);
-		statusOctave.setBounds(750, 290, 100, 20);
+		statusVol.setBounds(750, 190, 200, 20);
+		statusBPM.setBounds(750, 240, 200, 20);
+		statusOctave.setBounds(750, 290, 200, 20);
 		
 		
 		
@@ -85,24 +85,45 @@ public class SettingsScreen extends Screen {
 		saveButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (Settings.setDefaultVolume(Integer.parseInt(volumeField.getText())) == Settings.OUT_OF_RANGE) {
-					statusVol.setText("Valor invalido!");
+				try {
+					int parsedVolume = Integer.parseInt(volumeField.getText());
+					if (Settings.setDefaultVolume(parsedVolume) == Settings.OUT_OF_RANGE) {
+						statusVol.setText("Valor invalido!");
+					}
+					else {
+						statusVol.setText("Salvo!");
+					}
 				}
-				else {
-					statusVol.setText("Salvo!");
+				catch (NumberFormatException ex){
+					statusVol.setText("Valor deve ser inteiro!");
 				}
-				if (Settings.setDefaultBPM(Integer.parseInt(bpmField.getText())) == Settings.OUT_OF_RANGE) {
-					statusBPM.setText("Valor invalido!");
+				
+				try {
+					int parsedBPM = Integer.parseInt(bpmField.getText());
+					if (Settings.setDefaultBPM(parsedBPM) == Settings.OUT_OF_RANGE) {
+						statusBPM.setText("Valor invalido!");
+					}
+					else {
+						statusBPM.setText("Salvo!");
+					}
 				}
-				else {
-					statusBPM.setText("Salvo!");
+				catch (NumberFormatException ex){
+					statusBPM.setText("Valor deve ser inteiro!");
 				}
-				if (Settings.setDefaultOctave(Integer.parseInt(dropDownOctaves.getSelectedItem().toString())) == Settings.OUT_OF_RANGE) {
-					statusOctave.setText("Valor invalido!");
+				
+				try {
+					int parsedOctave = Integer.parseInt(dropDownOctaves.getSelectedItem().toString());
+					if (Settings.setDefaultOctave(parsedOctave) == Settings.OUT_OF_RANGE) {
+						statusOctave.setText("Valor invalido!");
+					}
+					else {
+						statusOctave.setText("Salvo!");
+					}
 				}
-				else {
-					statusOctave.setText("Salvo!");
+				catch (NumberFormatException ex){
+					statusOctave.setText("Valor deve ser inteiro!");
 				}
+				
 			}
 			
 		});
