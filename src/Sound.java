@@ -6,16 +6,16 @@ import org.jfugue.pattern.Pattern;
 import org.jfugue.player.*;
 
 public class Sound {
-	private static final int MinVolume = 24;
-	private static final int MaxVolume = 4*MinVolume;
-	private static final int DefaultVolume = MaxVolume;
+	public static final int MIN_VOLUME = 24;
+	public static final int MAX_VOLUME = 4*MIN_VOLUME;
 
-	private static final int MinOctave = 3;
-	private static final int MaxOctave = 9;
-	private static final int DefaultOctave = 5;
+	public static final int MIN_OCTAVE = 3;
+	public static final int MAX_OCTAVE = 9;
 
-	private static final int DefaultBPM = 30;
-	private static final int DefaultInstrument = 0; //Piano
+	public static final int MIN_BPM = 1;
+	public static final int MAX_BPM = 60; //placeholder
+	
+	private static final int DEFAULT_INSTRUMENT = 0; //Piano
 
 	private static Player player = new Player();
 	private static int currentOctave;
@@ -26,10 +26,10 @@ public class Sound {
 	
 	public static void Initialize() {
 		music = new Pattern();
-		setBPM(DefaultBPM);
-		setVolume(DefaultVolume);
-		setInstrument(DefaultInstrument);
-		setOctave(DefaultOctave);
+		setBPM(Settings.getDefaultBPM());
+		setVolume(Settings.getDefaultVolume());
+		setInstrument(DEFAULT_INSTRUMENT);
+		setOctave(Settings.getDefaultOctave());
 	}
 
 	public static void playNote(char note) {
@@ -68,16 +68,16 @@ public class Sound {
 	}
 	
 	public static void setOctave(int octave) {
-		if(octave > MaxOctave){
-			currentOctave = MinOctave;
+		if(octave > MAX_OCTAVE){
+			currentOctave = MIN_OCTAVE;
 		}else {
 			currentOctave = octave;
 		}
 	}
 	
 	public static void setVolume(int vol) {
-		if(vol > MaxVolume){
-			currentVolume = MinVolume;
+		if(vol > MAX_VOLUME){
+			currentVolume = MIN_VOLUME;
 		}else {
 			currentVolume = vol;
 		}

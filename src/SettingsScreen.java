@@ -24,25 +24,33 @@ public class SettingsScreen extends Screen {
 		panel.setBackground(Color.BLACK);
 		Font titleFont = new Font("sans-serif", Font.PLAIN, 24);
 		Font defaultFont = new Font("sans-serif", Font.PLAIN, 18);
-		String[] octavesList = {"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"};
+		String[] octavesList = {"3", "4", "5", "6", "7", "8", "9"};
 		
 		Image returnImage = ImageIO.read(getClass().getResource("resources/return-button.png"));
 		JLabel title = new JLabel("Configurações");
-		JLabel volume = new JLabel("Volume Padrão (0 - 100)");
-		JLabel bpm = new JLabel("BPM Padrão (80 - 180)");
+		JLabel volume = new JLabel("Volume Padrão (" + Sound.MIN_VOLUME + "-" + Sound.MAX_VOLUME + ")");
+		JLabel bpm = new JLabel("BPM Padrão (" + Sound.MIN_BPM + "-" + Sound.MAX_BPM +")");
 		JLabel octave = new JLabel("Oitava Padrão");
-		JTextField volumeField = new JTextField("50");
-		JTextField bpmField = new JTextField("120");
+		JTextField volumeField = new JTextField("" + Settings.getDefaultVolume());
+		JTextField bpmField = new JTextField("" + Settings.getDefaultBPM());
 		JComboBox<String> dropDownOctaves = new JComboBox<String>(octavesList);
 
 		JButton navButton = new JButton();
+		JButton saveButton = new JButton("Salvar");
 		JTextArea textArea = new JTextArea("Volume Padrão");
+		
+		JLabel statusVol = new JLabel(""); 
+		JLabel statusBPM = new JLabel("");
+		JLabel statusOctave = new JLabel(""); 
 		
 		title.setFont(titleFont);
 		title.setForeground(Color.WHITE);
 		volume.setForeground(Color.WHITE);
 		bpm.setForeground(Color.WHITE);
 		octave.setForeground(Color.WHITE);
+		statusVol.setForeground(Color.WHITE);
+		statusBPM.setForeground(Color.WHITE);
+		statusOctave.setForeground(Color.WHITE);
 		
 		title.setBounds(500, 10, 200, 200);
 		volume.setBounds(400, 100, 200, 200);
@@ -52,6 +60,11 @@ public class SettingsScreen extends Screen {
 		bpmField.setBounds(600, 240, 100, 20);
 		navButton.setBounds(10, 10, 50, 50);
 		dropDownOctaves.setBounds(600, 290, 100, 20);
+		saveButton.setBounds(600, 500, 100, 50);
+		statusVol.setBounds(750, 190, 100, 20);
+		statusBPM.setBounds(750, 240, 100, 20);
+		statusOctave.setBounds(750, 290, 100, 20);
+		
 		
 		
 		Icon returnIcon = ScreenManager.resizeIcon(returnImage, navButton);
@@ -59,49 +72,41 @@ public class SettingsScreen extends Screen {
 		navButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Mudou tela!");
+				statusVol.setText("");
+				statusBPM.setText("");
+				statusOctave.setText("");
 				screenManager.changeScreen(screenManager.getEditorScreen());
 			}
 			
 		});
 		
-		volumeField.addActionListener(new ActionListener(){
+
+		
+		saveButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int value = Integer.parseInt(volumeField.getText());
-				if(value >= 0 && value <= 100) {
-					System.out.println(value);
+				if (Settings.setDefaultVolume(Integer.parseInt(volumeField.getText())) == Settings.OUT_OF_RANGE) {
+					statusVol.setText("Valor invalido!");
 				}
 				else {
-					System.out.println("Valor Invalido");
-					volumeField.setText("50");
+					statusVol.setText("Salvo!");
+				}
+				if (Settings.setDefaultBPM(Integer.parseInt(bpmField.getText())) == Settings.OUT_OF_RANGE) {
+					statusBPM.setText("Valor invalido!");
+				}
+				else {
+					statusBPM.setText("Salvo!");
+				}
+				if (Settings.setDefaultOctave(Integer.parseInt(dropDownOctaves.getSelectedItem().toString())) == Settings.OUT_OF_RANGE) {
+					statusOctave.setText("Valor invalido!");
+				}
+				else {
+					statusOctave.setText("Salvo!");
 				}
 			}
 			
 		});
 		
-		bpmField.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int value = Integer.parseInt(bpmField.getText());
-				if(value >= 80 && value <= 180) {
-					System.out.println(value);
-				}
-				else {
-					System.out.println("Valor Invalido");
-					bpmField.setText("120");
-				}
-			}
-			
-		});
-		
-		dropDownOctaves.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-					System.out.println(dropDownOctaves.getSelectedItem());
-			}
-			
-		});
 		
 		panel.add(title);
 		panel.add(volume);
@@ -112,6 +117,10 @@ public class SettingsScreen extends Screen {
 		panel.add(bpm);
 		panel.add(dropDownOctaves);
 		panel.add(navButton);
+		panel.add(saveButton);
+		panel.add(statusVol);
+		panel.add(statusBPM);
+		panel.add(statusOctave);
 	}
 	
 }
