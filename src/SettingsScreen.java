@@ -75,6 +75,8 @@ public class SettingsScreen extends Screen {
 				statusVol.setText("");
 				statusBPM.setText("");
 				statusOctave.setText("");
+				volumeField.setText("" + Settings.getDefaultVolume());
+				bpmField.setText("" + Settings.getDefaultBPM());
 				screenManager.changeScreen(screenManager.getEditorScreen());
 			}
 			
