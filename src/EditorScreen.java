@@ -38,6 +38,7 @@ public class EditorScreen extends Screen {
 		JButton stopButton = new JButton();
 		JButton navButton = new JButton();
 		JButton importButton = new JButton();
+		JButton saveButton = new JButton("Salvar midi");
 		JTextArea textArea = new JTextArea("Digite aqui seu texto...");
 		JTable commandTable = new JTable();
 		JScrollPane scroll = new JScrollPane(textArea);
@@ -45,6 +46,7 @@ public class EditorScreen extends Screen {
 		
 		playButton.setBounds(500, 500, 50, 50);
 		stopButton.setBounds(560, 500, 50, 50);
+		saveButton.setBounds(100, 500, 150, 50);
 		navButton.setBounds(10, 10, 50, 50);
 		importButton.setBounds(760, 105, 40, 40);
 		scroll.setBounds(100, 150, 700, 300);
@@ -66,21 +68,31 @@ public class EditorScreen extends Screen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(playButton.getIcon()== playIcon) {
-					System.out.println("Tocando a música " + textArea.getText());
+					System.out.println("Tocando a mï¿½sica " + textArea.getText());
 					playButton.setIcon(pauseIcon);
+					MusicPlayer.Play();
 				}
 				else if(playButton.getIcon()== pauseIcon) {
 					System.out.println("Musica Pausada");
 					playButton.setIcon(playIcon);
-					}
+					MusicPlayer.Pause();
+				}
 			}
-			
 		});
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Stop!");
 				playButton.setIcon(playIcon);
+				MusicPlayer.Stop();
+			}
+			
+		});
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MusicRecorder.recordMusic();
+				System.out.println("Criado arquivo");
 			}
 			
 		});
@@ -116,25 +128,29 @@ public class EditorScreen extends Screen {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				System.out.println("Digitou");
+				sendTextUpdate(textArea.getText());
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				System.out.println("Apagou");
+				sendTextUpdate(textArea.getText());
 			}
 
 			@Override
-			public void changedUpdate(DocumentEvent e) {}
+			public void changedUpdate(DocumentEvent e) { sendTextUpdate(textArea.getText()); }
 			
 		});
-		
-	
+
 		panel.add(playButton);
 		panel.add(stopButton);
+		panel.add(saveButton);
 		panel.add(navButton);
 		panel.add(importButton);
 		panel.add(scroll);
 		panel.add(commandTable);
+	}
+
+	private void sendTextUpdate(String text){
+		Reader.setMusicString(text);
 	}
 }
