@@ -7,6 +7,7 @@ public class MusicRecorder {
 		String selectedCommand;
 		String previousCommand = "a";
 		boolean recording = true;
+		
 		while( recording ) {
 			
 			selectedCommand = Reader.read();
@@ -47,7 +48,7 @@ public class MusicRecorder {
 				Commands.ChangeInstrument(20);//Church Organ
 			}
 			else if ("END".equals(selectedCommand)) {
-				MusicPlayer.Stop();
+				recording = false;
 			}
 			else {
 				if ("ABCDEFG".indexOf(previousCommand) != -1) {
