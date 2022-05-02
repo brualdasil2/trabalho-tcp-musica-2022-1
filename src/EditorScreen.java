@@ -67,12 +67,16 @@ public class EditorScreen extends Screen {
 		playButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(playButton.getIcon()== playIcon) {
+				if(MusicPlayer.isStopped()) {
 					System.out.println("Tocando a m�sica " + textArea.getText());
 					playButton.setIcon(pauseIcon);
 					MusicPlayer.Play();
 				}
-				else if(playButton.getIcon()== pauseIcon) {
+				else if (MusicPlayer.isPaused()) {
+					playButton.setIcon(pauseIcon);
+					MusicPlayer.Resume();
+				}
+				else if(MusicPlayer.isPlaying()) {
 					System.out.println("Musica Pausada");
 					playButton.setIcon(playIcon);
 					MusicPlayer.Pause();

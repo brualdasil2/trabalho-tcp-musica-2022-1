@@ -45,6 +45,16 @@ public class Sound {
 		player.play(music);
 	}
 	
+	public static void pauseMusic() {
+		player.getManagedPlayer().pause();
+	}
+	public static void resumeMusic() {
+		player.getManagedPlayer().resume();
+	}
+	public static void stopMusic() {
+		player.getManagedPlayer().finish();
+	}
+	
 	public static void createMidiFile(String path) {
 		File file = new File(path);
 		try {
