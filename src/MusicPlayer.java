@@ -91,7 +91,7 @@ public class MusicPlayer {
 				Commands.ChangeInstrument(20);//Church Organ
 			}
 			else if ("END".equals(selectedCommand)) {
-				Stop();
+				building = false;
 			}
 			else {
 				if ("ABCDEFG".indexOf(previousCommand) != -1) {
