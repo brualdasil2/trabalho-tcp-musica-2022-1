@@ -4,7 +4,6 @@ import java.util.*;
 public class Reader {
     private static int currentPos = 0;
     private static String musicString;
-    private static String lastCommandCode;
 
     public static String read(){
         String currentCommand;
@@ -15,7 +14,6 @@ public class Reader {
             return "END";
         }
         currentPos ++;
-        lastCommandCode = currentCommand;
         if( !isValidCommand(currentCommand) ){
             return "ELSE";
         }
@@ -31,10 +29,6 @@ public class Reader {
     public static int GetCurrentPos(){
         return currentPos;
     }
-    public static String getLastCommandCode(){
-        return lastCommandCode;
-    }
-
     private static Boolean isValidCommand(String command){
         String[] validCommands = {" ","!","?",".",System.lineSeparator(),";",","};
         for (String s : validCommands) {
