@@ -68,7 +68,6 @@ public class EditorScreen extends Screen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(MusicPlayer.isStopped()) {
-					System.out.println("Tocando a m�sica " + textArea.getText());
 					playButton.setIcon(pauseIcon);
 					MusicPlayer.Play();
 				}
@@ -77,7 +76,6 @@ public class EditorScreen extends Screen {
 					MusicPlayer.Resume();
 				}
 				else if(MusicPlayer.isPlaying()) {
-					System.out.println("Musica Pausada");
 					playButton.setIcon(playIcon);
 					MusicPlayer.Pause();
 				}
@@ -86,7 +84,6 @@ public class EditorScreen extends Screen {
 		stopButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Stop!");
 				playButton.setIcon(playIcon);
 				MusicPlayer.Stop();
 			}
@@ -96,14 +93,12 @@ public class EditorScreen extends Screen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				MusicRecorder.recordMusic();
-				System.out.println("Criado arquivo");
 			}
 			
 		});
 		navButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Foi para Settings");
 				screenManager.changeScreen(screenManager.getSettingsScreen());
 			}
 			
@@ -112,7 +107,6 @@ public class EditorScreen extends Screen {
 		importButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Importou");
 				int result = fc.showOpenDialog(null);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File input = fc.getSelectedFile();
@@ -120,7 +114,6 @@ public class EditorScreen extends Screen {
 					try {
 						stringData = Files.lines(input.toPath(), StandardCharsets.UTF_8).collect(Collectors.joining("\n"));
 						textArea.setText(stringData);
-						System.out.println(stringData);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
