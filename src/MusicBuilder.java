@@ -10,11 +10,11 @@ public class MusicBuilder {
 			
 			selectedCommand = Reader.read();
 					
-			if ("ABCDEFG".indexOf(selectedCommand) != -1) {
+			if (isSubstringOf(selectedCommand, "ABCDEFG")) {
 				Commands.PlayNote(selectedCommand.charAt(0));
 			}
-			else if ("abcdefgjklmnpqrstvwxzJKLMNPQRSTVWXZ".indexOf(selectedCommand) != -1) {
-				if ("ABCDEFG".indexOf(previousCommand) != -1) {
+			else if (isSubstringOf(selectedCommand, "abcdefgjklmnpqrstvwxzJKLMNPQRSTVWXZ")) {
+				if (isSubstringOf(previousCommand, "ABCDEFG")) {
 					Commands.PlayNote(previousCommand.charAt(0));
 				}
 				else {
@@ -25,31 +25,31 @@ public class MusicBuilder {
 				Commands.IncreaseVolume();
 			}
 			else if ("!".equals(selectedCommand)) {
-				Commands.ChangeInstrument(114);//Agogo
+				Commands.ChangeInstrument(Commands.AGOGO);
 			}
-			else if ("OIUoiu".indexOf(selectedCommand) != -1) {
-				Commands.ChangeInstrument(7);//Harpsichord
+			else if (isSubstringOf(selectedCommand, "OIUoiu")) {
+				Commands.ChangeInstrument(Commands.HARPSICHORD);
 			}
 			else if (Character.isDigit(selectedCommand.charAt(0))) {
 				Commands.ChangeInstrument(Sound.getCurrentInstrument() + Integer.parseInt(selectedCommand));
 			}
-			else if ("?.".indexOf(selectedCommand) != -1) {
+			else if (isSubstringOf(selectedCommand, "?.")) {
 				Commands.IncreaseOctave();
 			}
-			else if (System.lineSeparator().indexOf(selectedCommand) != -1) {
-				Commands.ChangeInstrument(15);//Tubular Bells
+			else if (isSubstringOf(selectedCommand, System.lineSeparator())) {
+				Commands.ChangeInstrument(Commands.TUBULAR_BELLS);
 			}
 			else if (";".equals(selectedCommand)) {
-				Commands.ChangeInstrument(76);//Pan Flute
+				Commands.ChangeInstrument(Commands.PAN_FLUTE);
 			}
 			else if (",".equals(selectedCommand)) {
-				Commands.ChangeInstrument(20);//Church Organ
+				Commands.ChangeInstrument(Commands.CHURCH_ORGAN);
 			}
 			else if (Reader.END.equals(selectedCommand)) {
 				recording = false;
 			}
 			else {
-				if ("ABCDEFG".indexOf(previousCommand) != -1) {
+				if (isSubstringOf(previousCommand, "ABCDEFG")) {
 					Commands.PlayNote(previousCommand.charAt(0));
 				}
 				else {
@@ -58,5 +58,8 @@ public class MusicBuilder {
 			}			
 			previousCommand = selectedCommand;	
 		}
+	}
+	private static boolean isSubstringOf(String substring, String list) {
+		return list.indexOf(substring) != -1;
 	}
 }

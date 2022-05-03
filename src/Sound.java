@@ -12,10 +12,13 @@ public class Sound {
 	public static final int MAX_OCTAVE = 9;
 
 	public static final int MIN_BPM = 1;
-	public static final int MAX_BPM = 120; //placeholder
+	public static final int MAX_BPM = 180; 
 	
-	private static final int DEFAULT_INSTRUMENT = 0; //Piano
+	public static final int MIN_INSTRUMENT = 0;
+	public static final int MAX_INSTRUMENT = 128;
 
+	private static final int DEFAULT_INSTRUMENT = MIN_INSTRUMENT;
+	
 	private static Player player = new Player();
 	private static int currentOctave;
 	private static int currentBPM;

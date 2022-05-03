@@ -7,7 +7,6 @@ public class MusicPlayer {
 	
 	private static Thread playThread;  
 
-
 	public static void Play() {
 		playThread = new Thread(new Runnable() {
 			@Override

@@ -1,4 +1,11 @@
-public class Commands{
+public class Commands {
+	
+	public static final int AGOGO = 114;
+	public static final int HARPSICHORD = 7;
+	public static final int TUBULAR_BELLS = 15;
+	public static final int PAN_FLUTE = 76;
+	public static final int CHURCH_ORGAN = 114;
+	
     public static void PlayNote(char note){
         Sound.addNote(note);
     }
@@ -27,6 +34,11 @@ public class Commands{
 
     public static void IncreaseInstrument(int increment){
         int oldInstrument = Sound.getCurrentInstrument();
-        Sound.setInstrument(oldInstrument + increment);
+        if (oldInstrument + increment > Sound.MAX_INSTRUMENT) {
+        	Sound.setInstrument(Sound.MIN_INSTRUMENT);
+        }
+        else {
+        	Sound.setInstrument(oldInstrument + increment);
+        }
     }
 }
