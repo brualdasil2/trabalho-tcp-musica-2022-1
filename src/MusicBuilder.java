@@ -1,4 +1,3 @@
-
 public class MusicBuilder {
 	public static void buildMusic() {
 		Sound.Initialize();

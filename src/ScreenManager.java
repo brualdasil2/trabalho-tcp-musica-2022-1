@@ -1,8 +1,5 @@
-import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.*;
 import java.io.IOException;
-
 import javax.swing.*;
 
 public class ScreenManager {

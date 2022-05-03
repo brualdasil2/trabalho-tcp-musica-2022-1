@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.event.*;
 import javax.swing.*;
 
 public abstract class Screen {

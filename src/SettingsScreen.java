@@ -4,18 +4,13 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.text.InternationalFormatter;
-import javax.swing.text.NumberFormatter;
 
 public class SettingsScreen extends Screen {
 
@@ -23,13 +18,13 @@ public class SettingsScreen extends Screen {
 		super(screenManager);
 		panel.setBackground(Color.BLACK);
 		Font titleFont = new Font("sans-serif", Font.PLAIN, 24);
-		Font defaultFont = new Font("sans-serif", Font.PLAIN, 18);
+		new Font("sans-serif", Font.PLAIN, 18);
 		String[] octavesList = {"3", "4", "5", "6", "7", "8", "9"};
 		
 		Image returnImage = ImageIO.read(getClass().getResource("resources/return-button.png"));
 		JLabel title = new JLabel("Configurações");
 		JLabel volume = new JLabel("Volume Padrão (" + Sound.MIN_VOLUME + "-" + Sound.MAX_VOLUME + ")");
-		JLabel bpm = new JLabel("BPM Padrão (" + Sound.MIN_BPM + "-" + Sound.MAX_BPM +")");
+		JLabel bpm = new JLabel("BPM Padrão (" + Sound.MIN_BPM + "-" + Sound.MAX_BPM*2 +")");
 		JLabel octave = new JLabel("Oitava Padrão");
 		JTextField volumeField = new JTextField("" + Settings.getDefaultVolume());
 		JTextField bpmField = new JTextField("" + Settings.getDefaultBPM());
@@ -37,7 +32,7 @@ public class SettingsScreen extends Screen {
 
 		JButton navButton = new JButton();
 		JButton saveButton = new JButton("Salvar");
-		JTextArea textArea = new JTextArea("Volume Padrão");
+		new JTextArea("Volume Padrão");
 		
 		JLabel statusVol = new JLabel(""); 
 		JLabel statusBPM = new JLabel("");

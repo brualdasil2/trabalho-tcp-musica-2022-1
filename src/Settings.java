@@ -1,11 +1,10 @@
-
 public class Settings {
 	
 	public static final int OUT_OF_RANGE = -1;
 	public static final int OK = 0;
 	
 	private static int defaultVolume = 24;
-	private static int defaultBPM = 60;
+	private static int defaultBPM = 100;
 	private static int defaultOctave = 3;
 	
 	public static int setDefaultVolume(int volume) {
@@ -17,7 +16,7 @@ public class Settings {
 		return OK;
 	}
 	public static int setDefaultBPM(int bpm) {
-		if (bpm > Sound.MAX_BPM)
+		if (bpm > Sound.MAX_BPM*2)
 			return OUT_OF_RANGE;
 		if (bpm < Sound.MIN_BPM)
 			return OUT_OF_RANGE;
