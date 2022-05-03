@@ -33,15 +33,6 @@ public class Sound {
 		setInstrument(DEFAULT_INSTRUMENT);
 		setOctave(Settings.getDefaultOctave());
 	}
-
-	public static void playNote(char note) {
-		Pattern m = new Pattern();
-		m.add("T" + Integer.toString(currentBPM));
-		m.add(":CON(7, " + Integer.toString(currentVolume) + ")");
-		m.add("I" + currentInstrument );
-		m.add(note + Integer.toString(currentOctave) + "q");
-		player.play(m);
-	}
 	
 	public static void playMusic() {
 		player.play(music);

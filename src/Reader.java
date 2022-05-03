@@ -15,6 +15,10 @@ public class Reader {
             return END;
         }
         currentPos ++;
+        if(currentCommand.equals("\r")) {
+        	currentPos ++;
+        	return "\n";
+        }
         if( !isValidCommand(currentCommand) ){
             return ELSE;
         }
@@ -31,7 +35,7 @@ public class Reader {
         return currentPos;
     }
     private static Boolean isValidCommand(String command){
-        String[] validCommands = {" ","!","?",".",System.lineSeparator(),";",","};
+        String[] validCommands = {" ","!","?",".","\n",";",","};
         for (String s : validCommands) {
             if(s.indexOf(command) != -1){
                 return true;

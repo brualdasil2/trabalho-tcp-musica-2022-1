@@ -31,7 +31,7 @@ public class MusicBuilder {
 				Commands.ChangeInstrument(Commands.HARPSICHORD);
 			}
 			else if (Character.isDigit(selectedCommand.charAt(0))) {
-				Commands.ChangeInstrument(Sound.getCurrentInstrument() + Integer.parseInt(selectedCommand));
+				Commands.IncreaseInstrument(Integer.parseInt(selectedCommand));
 			}
 			else if (isSubstringOf(selectedCommand, "?.")) {
 				Commands.IncreaseOctave();
