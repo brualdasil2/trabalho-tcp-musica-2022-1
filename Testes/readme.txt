@@ -17,5 +17,5 @@ T3: CDOCDE;CDuCD
 T4: CDjkCDkkkkD
 T5: CDE()=>{😀}E
 T6: EF,hF
-T7: CD          CD
+T7: CD          CD CD
 T8: CD?.?...??CD

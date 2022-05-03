@@ -1,4 +1,3 @@
-
 public class MusicRecorder {
 	
 	public static void recordMusic() {

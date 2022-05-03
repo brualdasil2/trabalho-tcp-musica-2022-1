@@ -1,4 +1,3 @@
-
 public class MusicBuilder {
 	public static void buildMusic() {
 		Sound.Initialize();
@@ -10,7 +9,6 @@ public class MusicBuilder {
 		while( recording ) {
 			
 			selectedCommand = Reader.read();
-			System.out.println("leu " + selectedCommand);
 					
 			if (isSubstringOf(selectedCommand, "ABCDEFG")) {
 				Commands.PlayNote(selectedCommand.charAt(0));
@@ -47,7 +45,7 @@ public class MusicBuilder {
 			else if (",".equals(selectedCommand)) {
 				Commands.ChangeInstrument(Commands.CHURCH_ORGAN);
 			}
-			else if ("END".equals(selectedCommand)) {
+			else if (Reader.END.equals(selectedCommand)) {
 				recording = false;
 			}
 			else {

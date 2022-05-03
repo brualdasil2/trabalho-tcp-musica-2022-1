@@ -1,11 +1,10 @@
-
 public class Settings {
 	
 	public static final int OUT_OF_RANGE = -1;
 	public static final int OK = 0;
 	
 	private static int defaultVolume = 24;
-	private static int defaultBPM = 60;
+	private static int defaultBPM = 100;
 	private static int defaultOctave = 3;
 	
 	public static int setDefaultVolume(int volume) {

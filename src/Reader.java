@@ -1,7 +1,8 @@
-import java.io.*;
-import java.util.*;
-
 public class Reader {
+	
+	public static final String END = "END";
+	public static final String ELSE = "ELSE";
+	
     private static int currentPos = 0;
     private static String musicString;
 
@@ -11,11 +12,11 @@ public class Reader {
             currentCommand = Character.toString(musicString.charAt(currentPos));
         }
         catch(Exception e) {
-            return "END";
+            return END;
         }
         currentPos ++;
         if( !isValidCommand(currentCommand) ){
-            return "ELSE";
+            return ELSE;
         }
         
         return currentCommand;
