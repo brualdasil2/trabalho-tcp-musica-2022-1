@@ -1,0 +1,1 @@
+Esse doc só serve pro git aceitar a pasta, pq ele não aceita uma pasta vazia.
