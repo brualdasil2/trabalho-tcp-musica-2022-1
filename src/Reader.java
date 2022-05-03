@@ -32,7 +32,7 @@ public class Reader {
     private static Boolean isValidCommand(String command){
         String[] validCommands = {" ","!","?",".",System.lineSeparator(),";",","};
         for (String s : validCommands) {
-            if(command.charAt(0) == s.charAt(0)){
+            if(s.indexOf(command) != -1){
                 return true;
             }
         }

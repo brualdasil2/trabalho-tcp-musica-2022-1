@@ -29,7 +29,7 @@ public class MusicBuilder {
 			else if ("!".equals(selectedCommand)) {
 				Commands.ChangeInstrument(114);//Agogo
 			}
-			else if ("OIU".indexOf(selectedCommand) != -1) {
+			else if ("OIUoiu".indexOf(selectedCommand) != -1) {
 				Commands.ChangeInstrument(7);//Harpsichord
 			}
 			else if (Character.isDigit(selectedCommand.charAt(0))) {
@@ -38,7 +38,7 @@ public class MusicBuilder {
 			else if ("?.".indexOf(selectedCommand) != -1) {
 				Commands.IncreaseOctave();
 			}
-			else if ("\n".equals(selectedCommand)) {
+			else if (System.lineSeparator().indexOf(selectedCommand) != -1) {
 				Commands.ChangeInstrument(15);//Tubular Bells
 			}
 			else if (";".equals(selectedCommand)) {
