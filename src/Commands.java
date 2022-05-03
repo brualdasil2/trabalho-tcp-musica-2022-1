@@ -24,8 +24,8 @@ public class Commands {
         PlayNote(randomNote);
     }
 
-    public static void ChangeInstrument(int newInstrument){
-        Sound.setInstrument(newInstrument);
+    public static void ChangeInstrument(int newCode){
+        Sound.setInstrument(new Instrument(newCode));
     }
 
     public static void DoNothing(){
@@ -33,12 +33,7 @@ public class Commands {
     }
 
     public static void IncreaseInstrument(int increment){
-        int oldInstrument = Sound.getCurrentInstrument();
-        if (oldInstrument + increment > Sound.MAX_INSTRUMENT) {
-        	Sound.setInstrument(Sound.MIN_INSTRUMENT);
-        }
-        else {
-        	Sound.setInstrument(oldInstrument + increment);
-        }
+    	int currentCode = Sound.getCurrentInstrument().getMidiCode();
+        Sound.setInstrument(new Instrument(currentCode + increment));
     }
 }

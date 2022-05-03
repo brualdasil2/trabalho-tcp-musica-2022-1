@@ -15,23 +15,18 @@ public class Sound {
 	public static final int MIN_BPM = 1;
 	public static final int MAX_BPM = 60; 
 	
-	public static final int MIN_INSTRUMENT = 0;
-	public static final int MAX_INSTRUMENT = 128;
-
-	private static final int DEFAULT_INSTRUMENT = MIN_INSTRUMENT;
-	
 	private static Player player = new Player();
 	private static int currentOctave;
 	private static int currentBPM;
 	private static int currentVolume;
-	private static int currentInstrument;
+	private static Instrument currentInstrument;
 	private static Pattern music;
 	
 	public static void Initialize() {
 		music = new Pattern();
+		currentInstrument = new Instrument();
 		setBPM(Settings.getDefaultBPM());
 		setVolume(Settings.getDefaultVolume());
-		setInstrument(DEFAULT_INSTRUMENT);
 		setOctave(Settings.getDefaultOctave());
 	}
 
@@ -97,9 +92,9 @@ public class Sound {
 		music.add(":CON(7, " + Integer.toString(currentVolume) + ")");
 	}
 
-	public static void setInstrument(int instrument) {
-		currentInstrument = instrument;
-		music.add("I" + instrument  );
+	public static void setInstrument(Instrument newInstrument) {
+		currentInstrument = newInstrument;
+		music.add("I" + newInstrument.getMidiCode()  );
 	}
 
 	public static int getCurrentBPM() {
@@ -114,7 +109,7 @@ public class Sound {
 		return currentOctave;
 	}
 
-	public static int getCurrentInstrument(){
+	public static Instrument getCurrentInstrument(){
 		return currentInstrument;
 	}
 }
