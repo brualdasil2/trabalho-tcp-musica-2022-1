@@ -32,7 +32,7 @@ public class MusicBuilder {
 				Commands.ChangeInstrument(7);//Harpsichord
 			}
 			else if (Character.isDigit(selectedCommand.charAt(0))) {
-				Commands.ChangeInstrument(Sound.getCurrentInstrument() + Integer.parseInt(selectedCommand));
+				Commands.IncreaseInstrument(Integer.parseInt(selectedCommand));
 			}
 			else if ("?.".indexOf(selectedCommand) != -1) {
 				Commands.IncreaseOctave();
