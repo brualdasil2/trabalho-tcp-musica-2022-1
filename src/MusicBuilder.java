@@ -9,7 +9,6 @@ public class MusicBuilder {
 		while( recording ) {
 			
 			selectedCommand = Reader.read();
-			System.out.println("leu " + selectedCommand);
 					
 			if ("ABCDEFG".indexOf(selectedCommand) != -1) {
 				Commands.PlayNote(selectedCommand.charAt(0));
