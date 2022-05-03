@@ -33,9 +33,10 @@ int main() {
                 }
             }
         } while (tb != EOF && gb != EOF);
-
-        printf("T%s: %.2f%%\n", testNumber, ((float) (equalBytes/bytesRead))*100);
-        testNumber[0]++;
+        if (!erro) {
+            printf("T%s: %.2f%%\n", testNumber, ((float)equalBytes/(float)bytesRead)*100);
+            testNumber[0]++;
+        }
     }
     return 0;
 }
