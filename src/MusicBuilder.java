@@ -36,7 +36,7 @@ public class MusicBuilder {
 			else if (isSubstringOf(selectedCommand, "?.")) {
 				Commands.IncreaseOctave();
 			}
-			else if (isSubstringOf(selectedCommand, System.lineSeparator())) {
+			else if ("\n".equals(selectedCommand)) {
 				Commands.ChangeInstrument(Commands.TUBULAR_BELLS);
 			}
 			else if (";".equals(selectedCommand)) {

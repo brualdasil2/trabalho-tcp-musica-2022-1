@@ -37,7 +37,7 @@ public class Reader {
     private static Boolean isValidCommand(String command){
         String[] validCommands = {" ","!","?",".","\n",";",","};
         for (String s : validCommands) {
-            if(s.indexOf(command) != -1){
+            if(command.charAt(0) == s.charAt(0)){
                 return true;
             }
         }
