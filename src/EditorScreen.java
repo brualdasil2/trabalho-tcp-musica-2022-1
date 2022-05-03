@@ -24,6 +24,9 @@ import javax.swing.event.DocumentListener;
 
 public class EditorScreen extends Screen {
 	
+	private MusicPlayer player;
+	private MusicRecorder recorder;
+	
 	public EditorScreen(ScreenManager screenManager) throws IOException {
 		super(screenManager);
 		panel.setBackground(Color.BLACK);
@@ -64,22 +67,25 @@ public class EditorScreen extends Screen {
 		navButton.setIcon(settingsIcon);
 		importButton.setIcon(importIcon);
 		
+		player = new MusicPlayer();
+		recorder = new MusicRecorder();
+		
 		playButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(MusicPlayer.isStopped()) {
+				if(player.isStopped()) {
 					System.out.println("Tocando a m�sica " + textArea.getText());
 					playButton.setIcon(pauseIcon);
-					MusicPlayer.Play();
+					player.Play();
 				}
-				else if (MusicPlayer.isPaused()) {
+				else if (player.isPaused()) {
 					playButton.setIcon(pauseIcon);
-					MusicPlayer.Resume();
+					player.Resume();
 				}
-				else if(MusicPlayer.isPlaying()) {
+				else if(player.isPlaying()) {
 					System.out.println("Musica Pausada");
 					playButton.setIcon(playIcon);
-					MusicPlayer.Pause();
+					player.Pause();
 				}
 			}
 		});
@@ -88,14 +94,14 @@ public class EditorScreen extends Screen {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Stop!");
 				playButton.setIcon(playIcon);
-				MusicPlayer.Stop();
+				player.Stop();
 			}
 			
 		});
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MusicRecorder.recordMusic();
+				recorder.recordMusic();
 				System.out.println("Criado arquivo");
 			}
 			
@@ -155,6 +161,7 @@ public class EditorScreen extends Screen {
 	}
 
 	private void sendTextUpdate(String text){
-		Reader.setMusicString(text);
+		player.getBuilder().getReader().setMusicString(text);
+		recorder.getBuilder().getReader().setMusicString(text);
 	}
 }

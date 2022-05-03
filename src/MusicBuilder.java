@@ -1,67 +1,82 @@
 
 public class MusicBuilder {
-	public static void buildMusic() {
-		Sound.Initialize();
-		Reader.resetPos();
+	private Reader reader;
+	
+	public MusicBuilder() {
+		reader = new Reader();
+	}
+	
+	public Sound buildMusic() {
+		Sound song = new Sound();
+		reader.resetPos();
 		String selectedCommand;
 		String previousCommand = "a";
 		boolean recording = true;
 		
+		Commands commands = new Commands(song);
+		
 		while( recording ) {
 			
-			selectedCommand = Reader.read();
+			selectedCommand = reader.read();
 			System.out.println("leu " + selectedCommand);
 					
 			if (isSubstringOf(selectedCommand, "ABCDEFG")) {
-				Commands.PlayNote(selectedCommand.charAt(0));
+				commands.PlayNote(selectedCommand.charAt(0));
 			}
 			else if (isSubstringOf(selectedCommand, "abcdefgjklmnpqrstvwxzJKLMNPQRSTVWXZ")) {
 				if (isSubstringOf(previousCommand, "ABCDEFG")) {
-					Commands.PlayNote(previousCommand.charAt(0));
+					commands.PlayNote(previousCommand.charAt(0));
 				}
 				else {
-					Commands.DoNothing();
+					commands.DoNothing();
 				}
 			}
 			else if (" ".equals(selectedCommand)) {
-				Commands.IncreaseVolume();
+				commands.IncreaseVolume();
 			}
 			else if ("!".equals(selectedCommand)) {
-				Commands.ChangeInstrument(Commands.AGOGO);
+				commands.ChangeInstrument(Commands.AGOGO);
 			}
 			else if (isSubstringOf(selectedCommand, "OIUoiu")) {
-				Commands.ChangeInstrument(Commands.HARPSICHORD);
+				commands.ChangeInstrument(Commands.HARPSICHORD);
 			}
 			else if (Character.isDigit(selectedCommand.charAt(0))) {
-				Commands.ChangeInstrument(Sound.getCurrentInstrument().getMidiCode() + Integer.parseInt(selectedCommand));
+				commands.ChangeInstrument(song.getCurrentInstrument().getMidiCode() + Integer.parseInt(selectedCommand));
 			}
 			else if (isSubstringOf(selectedCommand, "?.")) {
-				Commands.IncreaseOctave();
+				commands.IncreaseOctave();
 			}
 			else if (isSubstringOf(selectedCommand, System.lineSeparator())) {
-				Commands.ChangeInstrument(Commands.TUBULAR_BELLS);
+				commands.ChangeInstrument(Commands.TUBULAR_BELLS);
 			}
 			else if (";".equals(selectedCommand)) {
-				Commands.ChangeInstrument(Commands.PAN_FLUTE);
+				commands.ChangeInstrument(Commands.PAN_FLUTE);
 			}
 			else if (",".equals(selectedCommand)) {
-				Commands.ChangeInstrument(Commands.CHURCH_ORGAN);
+				commands.ChangeInstrument(Commands.CHURCH_ORGAN);
 			}
 			else if ("END".equals(selectedCommand)) {
 				recording = false;
 			}
 			else {
 				if (isSubstringOf(previousCommand, "ABCDEFG")) {
-					Commands.PlayNote(previousCommand.charAt(0));
+					commands.PlayNote(previousCommand.charAt(0));
 				}
 				else {
-					Commands.DoNothing();
+					commands.DoNothing();
 				}
 			}			
 			previousCommand = selectedCommand;	
 		}
+		return song;
 	}
 	private static boolean isSubstringOf(String substring, String list) {
 		return list.indexOf(substring) != -1;
+	}
+	public void reset() {
+		reader.resetPos();
+	}
+	public Reader getReader() {
+		return reader;
 	}
 }

@@ -4,7 +4,7 @@ public class MusicPlayer {
 	public static final int PAUSED = 2;
 	public static final int STOPPED = 3;
 	
-	private static int status = STOPPED;
+	private int status;
 	private static int defaultVolume;
 	private static int defaultBPM;
 	private static int defaultOctave;
@@ -13,63 +13,64 @@ public class MusicPlayer {
 	private static int currentBPM;
 	private static int currentOctave;
 	
-	private static Thread playThread;  
+	private Thread playThread;  
+	private MusicBuilder builder;
+	private Sound song;
 	
 	public MusicPlayer() {
-		defaultVolume = 50;
-		defaultBPM = 220;
-		defaultOctave = 1;
-		currentInstrument = 0;
-		currentVolume = defaultVolume;
-		currentBPM = defaultBPM;
-		currentOctave = defaultOctave;
+		status = MusicPlayer.STOPPED;
+		builder = new MusicBuilder();
 	}
 
-	public static void Play() {
+	public void Play() {
 		playThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				MusicPlayer.aux_play();
+				aux_play();
 			}
 		});
 		playThread.start();
 	}
 	
-	private static void aux_play() {
+	private void aux_play() {
 		if (status != STOPPED) 
 			return;
 		
 		status = PLAYING;
 		
-		MusicBuilder.buildMusic();
-		Sound.playMusic();
+		song = builder.buildMusic();
+		song.playMusic();
 		Stop();
 	}
-	public static void Pause() {
+	public void Pause() {
 		if (status != PLAYING)
 			return;
 		status = PAUSED;
-		Sound.pauseMusic();
+		song.pauseMusic();
 	}
-	public static void Stop() {
+	public void Stop() {
 		
-		Reader.resetPos();
+		builder.reset();
 		status = STOPPED;
-		Sound.stopMusic();
+		song.stopMusic();
 		playThread.interrupt();
 	}
-	public static void Resume() {
-		Sound.resumeMusic();
+	public void Resume() {
+		song.resumeMusic();
 		status = PLAYING;
 	}
 	
-	public static boolean isPlaying() {
+	public MusicBuilder getBuilder() {
+		return builder;
+	}
+	
+	public boolean isPlaying() {
 		return status == PLAYING;
 	}	
-	public static boolean isPaused() {
+	public boolean isPaused() {
 		return status == PAUSED;
 	}
-	public static boolean isStopped() {
+	public boolean isStopped() {
 		return status == STOPPED;
 	}
 	public static int getDefaultVolume() {

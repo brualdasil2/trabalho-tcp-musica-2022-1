@@ -2,10 +2,14 @@ import java.io.*;
 import java.util.*;
 
 public class Reader {
-    private static int currentPos = 0;
-    private static String musicString;
+    private int currentPos;
+    private String musicString;
 
-    public static String read(){
+    public Reader() {
+    	currentPos = 0;
+    }
+    
+    public String read(){
         String currentCommand;
         try {
             currentCommand = Character.toString(musicString.charAt(currentPos));
@@ -21,15 +25,15 @@ public class Reader {
         return currentCommand;
     }
 
-    public static void setMusicString(String newString){
+    public void setMusicString(String newString){
         musicString = newString;
     }
 
-    public static void resetPos() { currentPos = 0; }
-    public static int GetCurrentPos(){
+    public void resetPos() { currentPos = 0; }
+    public int GetCurrentPos(){
         return currentPos;
     }
-    private static Boolean isValidCommand(String command){
+    private Boolean isValidCommand(String command){
         String[] validCommands = {" ","!","?",".",System.lineSeparator(),";",","};
         for (String s : validCommands) {
             if(s.indexOf(command) != -1){

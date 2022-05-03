@@ -15,22 +15,30 @@ public class Sound {
 	public static final int MIN_BPM = 1;
 	public static final int MAX_BPM = 60; 
 	
-	private static Player player = new Player();
-	private static int currentOctave;
-	private static int currentBPM;
-	private static int currentVolume;
-	private static Instrument currentInstrument;
-	private static Pattern music;
+	private Player player = new Player();
+	private int currentOctave;
+	private int currentBPM;
+	private int currentVolume;
+	private Instrument currentInstrument;
+	private Pattern music;
 	
-	public static void Initialize() {
+	public Sound() {
 		music = new Pattern();
 		currentInstrument = new Instrument();
 		setBPM(Settings.getDefaultBPM());
 		setVolume(Settings.getDefaultVolume());
 		setOctave(Settings.getDefaultOctave());
 	}
+	/*
+	public static void Initialize() {
+		music = new Pattern();
+		currentInstrument = new Instrument();
+		setBPM(Settings.getDefaultBPM());
+		setVolume(Settings.getDefaultVolume());
+		setOctave(Settings.getDefaultOctave());
+	*/
 
-	public static void playNote(char note) {
+	public void playNote(char note) {
 		Pattern m = new Pattern();
 		m.add("T" + Integer.toString(currentBPM));
 		m.add(":CON(7, " + Integer.toString(currentVolume) + ")");
@@ -39,21 +47,21 @@ public class Sound {
 		player.play(m);
 	}
 	
-	public static void playMusic() {
+	public void playMusic() {
 		player.play(music);
 	}
 	
-	public static void pauseMusic() {
+	public void pauseMusic() {
 		player.getManagedPlayer().pause();
 	}
-	public static void resumeMusic() {
+	public void resumeMusic() {
 		player.getManagedPlayer().resume();
 	}
-	public static void stopMusic() {
+	public void stopMusic() {
 		player.getManagedPlayer().finish();
 	}
 	
-	public static void createMidiFile(String path) {
+	public void createMidiFile(String path) {
 		File file = new File(path);
 		try {
 			MidiFileManager.savePatternToMidi(music, file);
@@ -62,20 +70,20 @@ public class Sound {
 		}
 	}
 	
-	public static void addNote(char note) {
+	public void addNote(char note) {
 		music.add(note + Integer.toString(currentOctave) + "q");
 	}
 	
-	public static void addPause() {
+	public void addPause() {
 		music.add("R");
 	}
 	
-	public static void setBPM(int bpm) {
+	public void setBPM(int bpm) {
 		currentBPM = bpm;
 		music.add("T" + Integer.toString(currentBPM));
 	}
 	
-	public static void setOctave(int octave) {
+	public void setOctave(int octave) {
 		if(octave > MAX_OCTAVE){
 			currentOctave = MIN_OCTAVE;
 		}else {
@@ -83,7 +91,7 @@ public class Sound {
 		}
 	}
 	
-	public static void setVolume(int vol) {
+	public void setVolume(int vol) {
 		if(vol > MAX_VOLUME){
 			currentVolume = MIN_VOLUME;
 		}else {
@@ -92,24 +100,24 @@ public class Sound {
 		music.add(":CON(7, " + Integer.toString(currentVolume) + ")");
 	}
 
-	public static void setInstrument(Instrument newInstrument) {
+	public void setInstrument(Instrument newInstrument) {
 		currentInstrument = newInstrument;
 		music.add("I" + newInstrument.getMidiCode()  );
 	}
 
-	public static int getCurrentBPM() {
+	public int getCurrentBPM() {
 		return currentBPM;
 	}
 
-	public static int getVolume(){
+	public int getVolume(){
 		return currentVolume;
 	}
 
-	public static int getCurrentOctave(){
+	public int getCurrentOctave(){
 		return currentOctave;
 	}
 
-	public static Instrument getCurrentInstrument(){
+	public Instrument getCurrentInstrument(){
 		return currentInstrument;
 	}
 }

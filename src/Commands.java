@@ -6,34 +6,40 @@ public class Commands {
 	public static final int PAN_FLUTE = 76;
 	public static final int CHURCH_ORGAN = 114;
 	
-    public static void PlayNote(char note){
-        Sound.addNote(note);
+	private Sound song;
+	
+	public Commands(Sound song) {
+		this.song = song;
+	}
+	
+    public void PlayNote(char note){
+        song.addNote(note);
     }
 
-    public static void IncreaseOctave(){
-        Sound.setOctave(Sound.getCurrentOctave()+1);
+    public void IncreaseOctave(){
+        song.setOctave(song.getCurrentOctave()+1);
     }
 
-    public static void IncreaseVolume(){
-        Sound.setVolume(2*Sound.getVolume());
+    public void IncreaseVolume(){
+    	song.setVolume(2*song.getVolume());
     }
 
-    public static void PlayRandomNote(){
+    public void PlayRandomNote(){
         String possibleNotes = "ABCDEFG";
         char randomNote = possibleNotes.toCharArray()[(int)(Math.random() * possibleNotes.length())];
         PlayNote(randomNote);
     }
 
-    public static void ChangeInstrument(int newCode){
-        Sound.setInstrument(new Instrument(newCode));
+    public void ChangeInstrument(int newCode){
+    	song.setInstrument(new Instrument(newCode));
     }
 
-    public static void DoNothing(){
-        Sound.addPause();
+    public void DoNothing(){
+    	song.addPause();
     }
 
-    public static void IncreaseInstrument(int increment){
-    	int currentCode = Sound.getCurrentInstrument().getMidiCode();
-        Sound.setInstrument(new Instrument(currentCode + increment));
+    public void IncreaseInstrument(int increment){
+    	int currentCode = song.getCurrentInstrument().getMidiCode();
+    	song.setInstrument(new Instrument(currentCode + increment));
     }
 }
