@@ -17,10 +17,10 @@ public class Reader {
         if( !isValidCommand(currentCommand) ){
             return "ELSE";
         }
+        
         return currentCommand;
     }
 
-    // chamado na interface
     public static void setMusicString(String newString){
         musicString = newString;
     }
@@ -41,6 +41,7 @@ public class Reader {
         }
         return false;
     }
+    
 }
 
 

@@ -8,7 +8,6 @@ public class MusicPlayer {
 	private static int defaultVolume;
 	private static int defaultBPM;
 	private static int defaultOctave;
-//	private static Instrument[] instruments;
 	private static int currentInstrument;
 	private static int currentVolume;
 	private static int currentBPM;
@@ -17,12 +16,9 @@ public class MusicPlayer {
 	private static Thread playThread;  
 	
 	public MusicPlayer() {
-		//playing = false;
 		defaultVolume = 50;
 		defaultBPM = 220;
 		defaultOctave = 1;
-//		instruments[1] = new Instrument();
-//		instruments[0] = new Instrument();
 		currentInstrument = 0;
 		currentVolume = defaultVolume;
 		currentBPM = defaultBPM;
@@ -94,13 +90,6 @@ public class MusicPlayer {
 	public static void setDefaultOctave(int newDefaultOctave) {
 		defaultOctave = newDefaultOctave;
 	}
-//	public static Instrument[] getInstruments() {
-//		return instruments;
-//	}
-//	public static void setInstruments(Instrument[] newInstruments) {
-//		instruments[1] = newInstruments[1];
-//		instruments[0] = newInstruments[0];
-//	}
 	public static int getCurrentInstrument() {
 		return currentInstrument;
 	}
