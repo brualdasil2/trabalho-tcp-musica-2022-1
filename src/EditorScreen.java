@@ -25,7 +25,7 @@ public class EditorScreen extends Screen {
 	
 	public EditorScreen(ScreenManager screenManager) throws IOException {
 		super(screenManager);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(Color.DARK_GRAY);
 		Image pauseImage = ImageIO.read(getClass().getResource("resources/pause-button.png"));
 		Image playImage = ImageIO.read(getClass().getResource("resources/play-button.png"));
 		Image stopImage = ImageIO.read(getClass().getResource("resources/stop-button.png"));

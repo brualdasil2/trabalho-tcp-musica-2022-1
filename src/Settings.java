@@ -16,7 +16,7 @@ public class Settings {
 		return OK;
 	}
 	public static int setDefaultBPM(int bpm) {
-		if (bpm > Sound.MAX_BPM*2)
+		if (bpm > Sound.MAX_BPM)
 			return OUT_OF_RANGE;
 		if (bpm < Sound.MIN_BPM)
 			return OUT_OF_RANGE;

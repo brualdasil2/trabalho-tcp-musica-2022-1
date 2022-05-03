@@ -12,7 +12,7 @@ public class Sound {
 	public static final int MAX_OCTAVE = 9;
 
 	public static final int MIN_BPM = 1;
-	public static final int MAX_BPM = 60; //placeholder
+	public static final int MAX_BPM = 120; //placeholder
 	
 	private static final int DEFAULT_INSTRUMENT = 0; //Piano
 

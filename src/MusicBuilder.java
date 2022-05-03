@@ -46,7 +46,7 @@ public class MusicBuilder {
 			else if (",".equals(selectedCommand)) {
 				Commands.ChangeInstrument(20);//Church Organ
 			}
-			else if ("END".equals(selectedCommand)) {
+			else if (Reader.END.equals(selectedCommand)) {
 				recording = false;
 			}
 			else {

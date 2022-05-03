@@ -16,7 +16,7 @@ public class SettingsScreen extends Screen {
 
 	public SettingsScreen(ScreenManager screenManager) throws IOException {
 		super(screenManager);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(Color.DARK_GRAY);
 		Font titleFont = new Font("sans-serif", Font.PLAIN, 24);
 		new Font("sans-serif", Font.PLAIN, 18);
 		String[] octavesList = {"3", "4", "5", "6", "7", "8", "9"};
@@ -24,7 +24,7 @@ public class SettingsScreen extends Screen {
 		Image returnImage = ImageIO.read(getClass().getResource("resources/return-button.png"));
 		JLabel title = new JLabel("Configurações");
 		JLabel volume = new JLabel("Volume Padrão (" + Sound.MIN_VOLUME + "-" + Sound.MAX_VOLUME + ")");
-		JLabel bpm = new JLabel("BPM Padrão (" + Sound.MIN_BPM + "-" + Sound.MAX_BPM*2 +")");
+		JLabel bpm = new JLabel("BPM Padrão (" + Sound.MIN_BPM + "-" + Sound.MAX_BPM +")");
 		JLabel octave = new JLabel("Oitava Padrão");
 		JTextField volumeField = new JTextField("" + Settings.getDefaultVolume());
 		JTextField bpmField = new JTextField("" + Settings.getDefaultBPM());
