@@ -2,10 +2,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -13,8 +10,10 @@ import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -26,7 +25,7 @@ public class EditorScreen extends Screen {
 	
 	public EditorScreen(ScreenManager screenManager) throws IOException {
 		super(screenManager);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(Color.DARK_GRAY);
 		Image pauseImage = ImageIO.read(getClass().getResource("resources/pause-button.png"));
 		Image playImage = ImageIO.read(getClass().getResource("resources/play-button.png"));
 		Image stopImage = ImageIO.read(getClass().getResource("resources/stop-button.png"));
@@ -34,23 +33,31 @@ public class EditorScreen extends Screen {
 		Image importImage = ImageIO.read(getClass().getResource("resources/import-button.png"));
 		JFileChooser fc = new JFileChooser();
 
+		ImageIcon tableImage1 = new ImageIcon("src/resources/table1.png");
+		ImageIcon tableImage2 = new ImageIcon("src/resources/table2.png");
+		
 		JButton playButton = new JButton();
 		JButton stopButton = new JButton();
 		JButton navButton = new JButton();
 		JButton importButton = new JButton();
 		JButton saveButton = new JButton("Salvar midi");
 		JTextArea textArea = new JTextArea("Digite aqui seu texto...");
-		JTable commandTable = new JTable();
+		JLabel commandTable1 = new JLabel();
+		JLabel commandTable2 = new JLabel();
 		JScrollPane scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		commandTable1.setIcon(tableImage1);
+		commandTable2.setIcon(tableImage2);
 		
 		playButton.setBounds(500, 500, 50, 50);
 		stopButton.setBounds(560, 500, 50, 50);
 		saveButton.setBounds(100, 500, 150, 50);
 		navButton.setBounds(10, 10, 50, 50);
-		importButton.setBounds(760, 105, 40, 40);
-		scroll.setBounds(100, 150, 700, 300);
-		commandTable.setBounds(900, 100, 200, 500);
+		importButton.setBounds(640, 95, 40, 40);
+		scroll.setBounds(30, 140, 650, 300);
+		commandTable1.setBounds(690, 40, 250, 500);
+		commandTable2.setBounds(910, 40, 350, 500);
 		
 		textArea.setLineWrap(true);
 		
@@ -151,7 +158,8 @@ public class EditorScreen extends Screen {
 		panel.add(navButton);
 		panel.add(importButton);
 		panel.add(scroll);
-		panel.add(commandTable);
+		panel.add(commandTable1);
+		panel.add(commandTable2);
 	}
 
 	private void sendTextUpdate(String text){

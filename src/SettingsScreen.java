@@ -4,26 +4,21 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.text.InternationalFormatter;
-import javax.swing.text.NumberFormatter;
 
 public class SettingsScreen extends Screen {
 
 	public SettingsScreen(ScreenManager screenManager) throws IOException {
 		super(screenManager);
-		panel.setBackground(Color.BLACK);
+		panel.setBackground(Color.DARK_GRAY);
 		Font titleFont = new Font("sans-serif", Font.PLAIN, 24);
-		Font defaultFont = new Font("sans-serif", Font.PLAIN, 18);
+		new Font("sans-serif", Font.PLAIN, 18);
 		String[] octavesList = {"3", "4", "5", "6", "7", "8", "9"};
 		
 		Image returnImage = ImageIO.read(getClass().getResource("resources/return-button.png"));
@@ -37,7 +32,7 @@ public class SettingsScreen extends Screen {
 
 		JButton navButton = new JButton();
 		JButton saveButton = new JButton("Salvar");
-		JTextArea textArea = new JTextArea("Volume Padrão");
+		new JTextArea("Volume Padrão");
 		
 		JLabel statusVol = new JLabel(""); 
 		JLabel statusBPM = new JLabel("");

@@ -1,4 +1,3 @@
-
 public class MusicPlayer {
 	public static final int PLAYING = 1;
 	public static final int PAUSED = 2;
